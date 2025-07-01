@@ -1,0 +1,27 @@
+{
+  "name": "js-dataframe-lib",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A JavaScript-native DataFrame and NDArray library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest"
+  },
+  "keywords": [
+    "dataframe",
+    "numpy",
+    "pandas",
+    "typescript",
+    "ndarray"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}
