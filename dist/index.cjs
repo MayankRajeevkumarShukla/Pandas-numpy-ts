@@ -57,6 +57,16 @@ var NDArray = class _NDArray {
     output._shape = [...this._shape];
     return output;
   }
+  map(fn) {
+    const result = new Float64Array(this.data.length);
+    for (let i = 0; i < this.data.length; i++) {
+      result[i] = fn(this.data[i], i);
+    }
+    const output = Object.create(_NDArray.prototype);
+    output.data = result;
+    output._shape = [...this._shape];
+    return output;
+  }
   get shape() {
     return this._shape;
   }

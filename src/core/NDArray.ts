@@ -36,6 +36,16 @@ export class NDArray {
     output._shape=[...this._shape]
     return output;
   }
+  map(fn:(values:number,index:number)=>number):NDArray{
+    const result = new Float64Array(this.data.length)
+    for(let i = 0;i< this.data.length;i++){
+      result[i] = fn(this.data[i],i)
+    }
+    const output = Object.create(NDArray.prototype)
+    output.data = result
+    output._shape = [...this._shape]
+    return output;
+  }
   get shape(): number[] {
     return this._shape;
   }
