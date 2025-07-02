@@ -19,3 +19,6 @@ addedArr.print();
 console.log("\n➡️ Map (square each element):");
 const mapped = arr1D.map(x => x * x);
 mapped.print();
+console.log("\n➡️ Reshape:");
+const reshaped = arr1D.reshape([2, 2]);
+reshaped.print();

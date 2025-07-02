@@ -46,6 +46,18 @@ export class NDArray {
     output._shape = [...this._shape]
     return output;
   }
+  reshape(newShape:number[]):NDArray{
+    const totalSize = newShape.reduce((a,b)=>a*b,1)
+    if(totalSize != this.data.length){
+      throw new Error(
+        `Cannot reshape array of size ${this.data.length} into shape ${newShape.join("x")}`
+      )
+    }
+    const output = Object.create(NDArray.prototype)
+    output.data = this.data
+    output._shape = [...newShape]
+    return output;
+  }
   get shape(): number[] {
     return this._shape;
   }
