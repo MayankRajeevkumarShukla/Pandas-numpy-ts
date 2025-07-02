@@ -22,3 +22,6 @@ mapped.print();
 console.log("\n➡️ Reshape:");
 const reshaped = arr1D.reshape([2, 2]);
 reshaped.print();
+console.log("\n➡️ Sum and Mean:");
+console.log("Sum:", arr1D.sum());
+console.log("Mean:", arr1D.mean());
