@@ -25,3 +25,18 @@ reshaped.print();
 console.log("\n➡️ Sum and Mean:");
 console.log("Sum:", arr1D.sum());
 console.log("Mean:", arr1D.mean());
+console.log("\n➡️ Multiply:");
+const mulScalar = arr1D.multiply(3);
+mulScalar.print();
+const mulArr = arr1D.multiply(new NDArray([1, 0, 1, 0]));
+mulArr.print();
+console.log("\n➡️ Subtract scalar:");
+const subScalar = arr1D.subtract(2);
+subScalar.print();
+console.log("\n➡️ Subtract array:");
+const otherArr = new NDArray([-1, 1, 1, 1]);
+const subArr = arr1D.subtract(otherArr);
+subArr.print();
+
+
+

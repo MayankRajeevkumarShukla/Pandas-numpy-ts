@@ -18,37 +18,37 @@ export class NDArray {
       this._shape = [this.data.length];
     }
   }
-  add(value :NDArray |number):NDArray{
+  add(value: NDArray | number): NDArray {
     const result = new Float64Array(this.data.length)
-    if(typeof value === "number"){
-      for(let i = 0;i<this.data.length;i++){
-        result[i] = this.data[i]+value
+    if (typeof value === "number") {
+      for (let i = 0; i < this.data.length; i++) {
+        result[i] = this.data[i] + value
       }
-    }else{
-       if (this._shape.toString() !== value._shape.toString()) {
+    } else {
+      if (this._shape.toString() !== value._shape.toString()) {
         throw new Error("Shape mismatch for element-wise addition");
-      }for(let i=0;i<this.data.length;i++){
-        result[i]=this.data[i] + value.data[i]
+      } for (let i = 0; i < this.data.length; i++) {
+        result[i] = this.data[i] + value.data[i]
       }
-    }
-    const output = Object.create(NDArray.prototype)
-    output.data = result
-    output._shape=[...this._shape]
-    return output;
-  }
-  map(fn:(values:number,index:number)=>number):NDArray{
-    const result = new Float64Array(this.data.length)
-    for(let i = 0;i< this.data.length;i++){
-      result[i] = fn(this.data[i],i)
     }
     const output = Object.create(NDArray.prototype)
     output.data = result
     output._shape = [...this._shape]
     return output;
   }
-  reshape(newShape:number[]):NDArray{
-    const totalSize = newShape.reduce((a,b)=>a*b,1)
-    if(totalSize != this.data.length){
+  map(fn: (values: number, index: number) => number): NDArray {
+    const result = new Float64Array(this.data.length)
+    for (let i = 0; i < this.data.length; i++) {
+      result[i] = fn(this.data[i], i)
+    }
+    const output = Object.create(NDArray.prototype)
+    output.data = result
+    output._shape = [...this._shape]
+    return output;
+  }
+  reshape(newShape: number[]): NDArray {
+    const totalSize = newShape.reduce((a, b) => a * b, 1)
+    if (totalSize != this.data.length) {
       throw new Error(
         `Cannot reshape array of size ${this.data.length} into shape ${newShape.join("x")}`
       )
@@ -58,16 +58,61 @@ export class NDArray {
     output._shape = [...newShape]
     return output;
   }
-  sum():number{
+  sum(): number {
     let total = 0
-    for(let i = 0;i<this.data.length;i++){
+    for (let i = 0; i < this.data.length; i++) {
       total += this.data[i]
     }
     return total;
   }
-  mean():number{
-    return this.sum() /this.data.length
+  mean(): number {
+    return this.sum() / this.data.length
   }
+  multiply(value: NDArray | number): NDArray {
+    const result = new Float64Array(this.data.length);
+
+    if (typeof value === "number") {
+      for (let i = 0; i < this.data.length; i++) {
+        result[i] = this.data[i] * value;
+      }
+    } else {
+      if (this._shape.toString() !== value._shape.toString()) {
+        throw new Error("Shape mismatch for element-wise multiplication");
+      }
+      for (let i = 0; i < this.data.length; i++) {
+        result[i] = this.data[i] * value.data[i];
+      }
+    }
+
+    const output = Object.create(NDArray.prototype);
+    output.data = result;
+    output._shape = [...this._shape];
+    return output;
+  }
+  subtract(value: NDArray | number): NDArray {
+    const result = new Float64Array(this.data.length);
+
+    if (typeof value === "number") {
+      for (let i = 0; i < this.data.length; i++) {
+        result[i] = this.data[i] - value;
+      }
+    } else {
+      if (this._shape.toString() !== value._shape.toString()) {
+        throw new Error("Shape mismatch for element-wise subtraction");
+      }
+      for (let i = 0; i < this.data.length; i++) {
+        result[i] = this.data[i] - value.data[i];
+      }
+    }
+
+    const output = Object.create(NDArray.prototype);
+    output.data = result;
+    output._shape = [...this._shape];
+    return output;
+  }
+
+
+
   get shape(): number[] {
     return this._shape;
   }
