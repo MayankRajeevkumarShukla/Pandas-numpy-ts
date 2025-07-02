@@ -58,6 +58,16 @@ export class NDArray {
     output._shape = [...newShape]
     return output;
   }
+  sum():number{
+    let total = 0
+    for(let i = 0;i<this.data.length;i++){
+      total += this.data[i]
+    }
+    return total;
+  }
+  mean():number{
+    return this.sum() /this.data.length
+  }
   get shape(): number[] {
     return this._shape;
   }
