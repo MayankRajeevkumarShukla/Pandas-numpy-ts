@@ -16,3 +16,6 @@ console.log("\n➡️ Add arrays:");
 const another1D = new NDArray([9, 8, 7, 6]);
 const addedArr = arr1D.add(another1D);
 addedArr.print();
+console.log("\n➡️ Map (square each element):");
+const mapped = arr1D.map(x => x * x);
+mapped.print();
