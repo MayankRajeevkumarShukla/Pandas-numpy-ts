@@ -1,7 +1,7 @@
 // src/core/NDArray.ts
 
 export class NDArray {
-  private data: Float64Array;
+ public readonly data: Float64Array;
   private _shape: number[];
 
   constructor(values: number[] | number[][]) {
