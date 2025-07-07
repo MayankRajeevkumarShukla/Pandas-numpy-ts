@@ -53,7 +53,7 @@ export class DataFrame {
       this._length = Object.values(data)[0].length;
     }
   }
-  print(): void {
+   print(): void {
     const keys = this.columnsList;
     const rows: string[][] = [];
 

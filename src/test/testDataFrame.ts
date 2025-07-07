@@ -6,9 +6,4 @@ const df = new DataFrame([
   { name: "Charlie", age: 28 },
 ]);
 
-console.log("Shape:", df.shape);
-console.log("Columns:", df.columnsList);
-console.log("Age Column:");
-(df.getColumn("age") as any).print(); // NDArray only
-
-// df.getColumn("name").print(); // ⚠️ This would error (string[])
+df.print();
