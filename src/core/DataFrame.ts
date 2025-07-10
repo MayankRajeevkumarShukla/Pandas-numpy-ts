@@ -53,7 +53,7 @@ export class DataFrame {
       this._length = Object.values(data)[0].length;
     }
   }
-   print(): void {
+  print(): void {
     const keys = this.columnsList;
     const rows: string[][] = [];
 
@@ -91,7 +91,49 @@ export class DataFrame {
       console.log(line);
     }
   }
+  head(n: number = 5): void {
+    const sliceCount = Math.min(n, this._length)
+    this._printSlice(0, sliceCount)
+  }
+  tail(n: number = 5): void {
+    const sliceCount = Math.min(n, this._length)
+    const start = this._length - sliceCount
+    this._printSlice(start, this._length)
+  }
+  private _printSlice(start: number, end: number): void {
+    const keys = this.columnsList
+    const rows: string[][] = []
+    for (let i = start; i < end; i++) {
+      const row: string[] = []
+      for (const key of keys) {
+        const col = this.columns[key]
+        if (col instanceof NDArray) {
+          row.push(col.data[i].toString())
+        } else {
+          row.push(col[i]?.toString() ?? "");
+        }
+      }
+      rows.push(row)
+    }
+    // column width
+    const colWidths = keys.map((key, idx) => {
+      const maxContent = Math.max(
+        key.length,
+        ...rows.map(row => row[idx].length)
+      )
+      return maxContent
+    })
+    //Header
+    const header = keys.map((key, i) => key.padEnd(colWidths[i])).join(" | ");
+    const separator = keys.map((_, i) => "-".repeat(colWidths[i])).join("-|-");
+    console.log(header);
+    console.log(separator);
 
+    for (const row of rows) {
+      const line = row.map((cell, i) => cell.padEnd(colWidths[i])).join(" | ");
+      console.log(line);
+    }
+  }
   get length() {
     return this._length;
   }
