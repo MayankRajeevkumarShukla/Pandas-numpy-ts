@@ -17,3 +17,7 @@ df.tail(4);
 console.log("\n➡️ df.select(['name', 'age']):");
 const selected = df.select(["name", "age"]);
 selected.print();
+console.log("\n➡️ Mean of 'age':");
+console.log("Mean age:", df.mean("age"));
+console.log("\n➡️ Sum of 'age':");
+console.log("Total age:", df.sum("age"));

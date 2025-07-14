@@ -149,6 +149,22 @@ export class DataFrame {
     }
     return new DataFrame(selected)
   }
+  mean(columnName:string):number{
+    const col = this.getColumn(columnName)
+    if(!(col instanceof NDArray)){
+           throw new Error(`Column "${columnName}" is not numeric`);
+
+    }
+    return col.mean();
+  }
+  sum(columnName:string):number{
+    const col = this.getColumn(columnName)
+    if(!(col instanceof NDArray)){
+           throw new Error(`Column "${columnName}" is not numeric`);
+
+    }
+    return col.sum();
+  }
   get length() {
     return this._length;
   }
