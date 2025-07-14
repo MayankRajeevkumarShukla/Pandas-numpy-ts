@@ -165,6 +165,30 @@ export class DataFrame {
     }
     return col.sum();
   }
+   filter(predicate: (row: Record<string, any>) => boolean): DataFrame {
+    const keys = this.columnsList;
+    const resultRows: Record<string, any>[] = [];
+
+    for (let i = 0; i < this._length; i++) {
+      const row: Record<string, any> = {};
+
+      for (const key of keys) {
+        const col = this.columns[key];
+        if (col instanceof NDArray) {
+          row[key] = col.data[i];
+        } else {
+          row[key] = col[i];
+        }
+      }
+
+      if (predicate(row)) {
+        resultRows.push(row);
+      }
+    }
+
+    return new DataFrame(resultRows);
+  }
+
   get length() {
     return this._length;
   }

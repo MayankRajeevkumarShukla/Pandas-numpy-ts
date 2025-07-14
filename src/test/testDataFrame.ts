@@ -21,3 +21,6 @@ console.log("\n➡️ Mean of 'age':");
 console.log("Mean age:", df.mean("age"));
 console.log("\n➡️ Sum of 'age':");
 console.log("Total age:", df.sum("age"));
+console.log("\n➡️ Filter: age > 28");
+const filtered = df.filter(row => row.age > 28);
+filtered.print();
