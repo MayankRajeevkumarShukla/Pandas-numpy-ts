@@ -134,6 +134,21 @@ export class DataFrame {
       console.log(line);
     }
   }
+  select(columnNames:string[]) :DataFrame{
+    const selected :Record<string,any[]> = {}
+    for(const name of columnNames){
+      if(!(name in this.columns)){
+        throw new Error(`Column "${name}" not found`)
+      }
+      const col = this.columns[name]
+      if(col instanceof NDArray){
+        selected[name] = Array.from(col.data)
+      }else{
+        selected[name] =[...col]
+      }
+    }
+    return new DataFrame(selected)
+  }
   get length() {
     return this._length;
   }

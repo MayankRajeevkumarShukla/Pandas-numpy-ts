@@ -14,3 +14,6 @@ df.head(3);
 
 console.log("\n➡️ df.tail(2):");
 df.tail(4);
+console.log("\n➡️ df.select(['name', 'age']):");
+const selected = df.select(["name", "age"]);
+selected.print();
