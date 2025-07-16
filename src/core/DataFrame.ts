@@ -188,7 +188,24 @@ export class DataFrame {
 
     return new DataFrame(resultRows);
   }
-
+ map(mapper:(row:Record<string,any>,index:number)=>Record<string,any>):DataFrame{
+  const keys = this.columnsList
+  const resultRows : Record<string,any>[]=[]
+  for(let i =0;i<this._length;i++){
+    const row :Record<string,any> = {}
+    for(const key of keys){
+      const col = this.columns[key];
+      if(col instanceof NDArray){
+       row[key] = col.data[i]
+      }else{
+        row[key] = col[i]
+      }
+    }
+    const mapped = mapper(row,i)
+    resultRows.push(mapped)
+  }
+  return new DataFrame(resultRows)
+ }
   get length() {
     return this._length;
   }
