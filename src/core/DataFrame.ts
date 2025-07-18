@@ -206,6 +206,33 @@ export class DataFrame {
   }
   return new DataFrame(resultRows)
  }
+   sortBy(column: string, ascending: boolean = true): DataFrame {
+    const keys = this.columnsList;
+    const rows: Record<string, any>[] = [];
+
+    // Build full rows first
+    for (let i = 0; i < this._length; i++) {
+      const row: Record<string, any> = {};
+      for (const key of keys) {
+        const col = this.columns[key];
+        row[key] = col instanceof NDArray ? col.data[i] : col[i];
+      }
+      rows.push(row);
+    }
+
+    // Sort rows by given column
+    rows.sort((a, b) => {
+      const valA = a[column];
+      const valB = b[column];
+
+      if (valA < valB) return ascending ? -1 : 1;
+      if (valA > valB) return ascending ? 1 : -1;
+      return 0;
+    });
+
+    return new DataFrame(rows);
+  }
+
   get length() {
     return this._length;
   }

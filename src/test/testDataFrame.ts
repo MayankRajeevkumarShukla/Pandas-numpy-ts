@@ -30,3 +30,8 @@ const aged = df.map(row => ({
   age: row.age + 1
 }));
 aged.print();
+console.log("\n➡️ Sorted by age (asc):");
+df.sortBy("age").print();
+
+console.log("\n➡️ Sorted by name (desc):");
+df.sortBy("name", false).print();
